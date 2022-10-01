@@ -1,5 +1,4 @@
-#ifndef PSXGS_TMD_H
-#define PSXGS_TMD_H
+#pragma once
 
 #include <psxgte.h>
 #include <stdio.h>
@@ -14,6 +13,8 @@ typedef struct {
 // A TMD object entry. Describes where to find the
 // various components of an object.
 typedef struct {
+    unsigned long id, flags, nobj;
+
     // Pointer to beginning of vertex data
     unsigned long *vertop;
     // Number of vertices
@@ -98,23 +99,21 @@ typedef enum {
     GS_TMD_PRIMITIVE_F4,
     // Unknown primitive
     GS_TMD_PRIMITIVE_UNKNOWN,
-} GsTMDPrimitiveKind;
+} GsTMD_Prim;
 
 // Return a pointer to the nth object in the given TMD.
-GsTMDObject *GsLookupTmdObj(const unsigned long *tmd, const size_t n);
+GsTMD *GsLookupTMDObj(const unsigned long *tmd, const size_t n);
 // Return the nth vertex of the given TMD object.
-SVECTOR GsLookupTmdVert(const GsTMDObject *obj, const size_t n);
+SVECTOR GsLookupTMDVert(const GsTMDObject *obj, const size_t n);
 // Return the nth normal of the given TMD object.
-SVECTOR GsLookupTmdNorm(const GsTMDObject *obj, const size_t n);
+SVECTOR GsLookupTMDNorm(const GsTMDObject *obj, const size_t n);
 // Scale the given vector according to the TMD format's scale field.
-void GsScaleTmdVert(SVECTOR *vert, const long scale);
+void GsScaleTMDVert(SVECTOR *vert, const long scale);
 // Parse header of a TMD primitive packet.
 GsTMDPacketHeader GsParseTMDPacketHeader(const unsigned long hdr_int);
 // Parse an untextured triangle TMD primitive.
-GsTMDPF3 GsParsePolyF3Primitive(const unsigned long *prim_data);
+GsTMDPF3 GsParsePolyF3Prim(const unsigned long *prim_data);
 // Parse an untextured quad TMD primitive.
-GsTMDPF4 GsParsePolyF4Primitive(const unsigned long *prim_data);
+GsTMDPF4 GsParsePolyF4Prim(const unsigned long *prim_data);
 // Figure out what kind of primitive we're dealing with.
-GsTMDPrimitiveKind GsParseTMDPrimitiveKind(const unsigned long *tmd_prim);
-
-#endif
+GsTMD_Prim GsParseTMDPrim(const unsigned long *tmd_prim);

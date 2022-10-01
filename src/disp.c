@@ -37,5 +37,4 @@ void GsSwapDispBuffer(void) {
 }
 
 int GsGetActiveBuffer(void) { return (int)PSDIDX; }
-
 void GsSetProjection(unsigned long h) { gte_SetGeomScreen((long)h); }

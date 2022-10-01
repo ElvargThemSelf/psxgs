@@ -13,7 +13,7 @@
 
 #define TMD_HDR_FLAG_REMAP_BIT 0x00000001
 
-void GsMapModelingData(unsigned long *p) {
+void GsMAPModelingData(unsigned long *p) {
     GsTMDHeader *hdr = (GsTMDHeader *)p;
     // Are the addresses in need of remap?
     if ((hdr->flags & TMD_HDR_FLAG_REMAP_BIT) == TMD_HDR_FLAG_REMAP_BIT) {

@@ -1,6 +1,5 @@
 #include <inline_c.h>
-#include <psxgpu.h>
-#include <psxgte.h>
+#include <psxgs.h>
 #include <stdbool.h>
 
 #include "dbg.h"
@@ -40,18 +39,15 @@ void GsInitGraph(unsigned short x_res, unsigned short y_res, unsigned short int1
     }
 
     // Setup VRAM color depth
-    if (vram == GsVRAM24BIT) {
-        GsDISPENV.isrgb24 = 1;
-    } else {
-        GsDISPENV.isrgb24 = 0;
-    }
+    if (vram == GsVRAM24BIT)    GsDISPENV.isrgb24 = 1;
+    else                        GsDISPENV.isrgb24 = 0;
 
     // TODO: Honor GTE/GPU offset (once I figure out what Sony means by them)
 
     // TODO: Init GsIDMATRIX and GsIDMATRIX2
 }
 
-void GsInit3D(void) {
+void GsInitGTE(void) {
     // Initialize GTE
     InitGeom();
     // Center the GTE to middle of screen

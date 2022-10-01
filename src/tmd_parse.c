@@ -14,13 +14,13 @@
 #define TMD_OPT_QUAD      0x8   // 0b00001000
 
 // Return a pointer to the nth object in the given TMD.
-GsTMDObject *GsLookupTmdObj(const unsigned long *tmd, const size_t n) {
+GsTMDObject *GsLookupTMDObj(const unsigned long *tmd, const size_t n) {
     unsigned long *tmd_after_hdr = (unsigned long *)((size_t)tmd + (size_t)sizeof(GsTMDHeader));
     GsTMDObject *obj_table = (GsTMDObject *)tmd_after_hdr;
     return obj_table + n;
 }
 
-SVECTOR GsLookupTmdVert(const GsTMDObject *obj, const size_t n) {
+SVECTOR GsLookupTMDVert(const GsTMDObject *obj, const size_t n) {
     const unsigned long *vert_data = obj->vertop + (2 * n);
     SVECTOR vert;
     vert.vx = vert_data[0] & 0x0000FFFF;
@@ -30,7 +30,7 @@ SVECTOR GsLookupTmdVert(const GsTMDObject *obj, const size_t n) {
     return vert;
 }
 
-SVECTOR GsLookupTmdNorm(const GsTMDObject *obj, const size_t n) {
+SVECTOR GsLookupTMDNorm(const GsTMDObject *obj, const size_t n) {
     const unsigned long *norm_data = obj->nortop + (2 * n);
     SVECTOR norm;
     norm.vx = norm_data[0] & 0x0000FFFF;
@@ -78,7 +78,7 @@ GsTMDPF4 GsParsePolyF4Primitive(const unsigned long *prim_data) {
     return prim;
 }
 
-GsTMDPrimitiveKind GsParseTMDPrimitiveKind(const unsigned long *tmd_prim) {
+GsTMDPrimitiveKind GsParseTMDPrimitive(const unsigned long *tmd_prim) {
     const GsTMDPacketHeader hdr = GsParseTMDPacketHeader(*tmd_prim);
 #ifdef DEBUG
     printf("Determining kind of TMD packet with header: ");

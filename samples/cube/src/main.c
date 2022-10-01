@@ -4,8 +4,8 @@
  * consisting of a single 3D object which is just an untextured cube.
  */
 
-#include <psxgpu.h>
 #include <psxgs.h>
+
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -22,7 +22,7 @@ extern __attribute__((aligned(16))) unsigned long Cube_Tmd[];
 // The library generates GPU primitive command packets and needs
 // a place to store them. This is the space where that happens.
 // There are 2 packet buffers to enable processing the next frame on the CPU+GTE while the GPU is still drawing.
-PACKET __attribute__((aligned(32))) Gpu_packets[2][PACKET_AREA_SIZE];
+PACKET __attribute__((aligned(32))) GPU_PACKETS[2][PACKET_AREA_SIZE];
 
 // The ordering table is where references to GPU packets in the GPU packet buffer are stored.
 // This is just a handle to the table, the actual table is defined below.
@@ -63,7 +63,7 @@ void init_graphics(void) {
     // Initialize data structures needed for 3D functionality,
     // such as the default light matrix.
     // Also initializes the GTE.
-    GsInit3D();
+    GsInitGTE();
 
     // Link the OT handles with the actual tables.
     OT_handles[0].length = OT_PRECISION;
@@ -82,6 +82,7 @@ void init_graphics(void) {
 
     // Remap the addresses in the TMD to point to where it actually is in process memory.
     GsMapModelingData(Cube_Tmd);
+
     // Link the cube in the TMD to it's handle so we can manipulate and sort it.
     // The unsigned long argument here is indeed a pointer, but Sony decided for whatever reason to pass it as an
     // integer.
@@ -118,7 +119,7 @@ int main(void) {
         // Figure out which of the buffers is currently the back (AKA drawing) buffer.
         const int back_buffer = GsGetActiveBuffer();
         // Tell the library to put new GPU primitives into the back packet buffer.
-        GsSetWorkBase(Gpu_packets[back_buffer]);
+        GsSetWorkBase(GPU_PACKETS[back_buffer]);
         // Clear the ordering table so that new primitives can be added.
         GsClearOT(0, 0, &OT_handles[back_buffer]);
         // Sort a packet ordering the GPU to clear the screen before doing anything else.

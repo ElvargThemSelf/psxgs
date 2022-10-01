@@ -10,7 +10,7 @@ void GsInitGraph(unsigned short x_res, unsigned short y_res, unsigned short int1
                  unsigned short vram);
 
 // Initialize 3D-specific parts of the graphics system
-void GsInit3D(void);
+void GsInitGTE(void);
 
 // Set the address of the area reserved for GPU packet buffering
 void GsSetWorkBase(PACKET *base_addr);

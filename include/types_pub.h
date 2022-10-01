@@ -1,5 +1,4 @@
-#ifndef PSXGS_TYPES_PUB_H_
-#define PSXGS_TYPES_PUB_H_
+#pragma once 
 
 // IMPLEMENTATION DETAIL. DO NOT IMPORT DIRECTLY.
 // This header describes the various libgs/psxgs datatypes.
@@ -84,7 +83,7 @@ typedef struct {
     MATRIX view;
     // The coordinate system of the viewpoint.
     GsCOORDINATE2 *super;
-} GsVIEW2;
+} GsVIEW;
 
 // A viewpoint/camera (more complex version).
 typedef struct {
@@ -96,6 +95,4 @@ typedef struct {
     long rz;
     // The coordinate system to which all the structure's coordinates are relative to.
     GsCOORDINATE2 *super;
-} GsRVIEW2;
-
-#endif
+} GsRVIEW;

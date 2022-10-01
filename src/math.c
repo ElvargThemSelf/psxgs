@@ -2,7 +2,7 @@
 
 #include <stdbool.h>
 
-int GsIpow(int base, int exp) {
+int GsIPOW(int base, int exp) {
     int result = 1;
     while (true) {
         if (exp & 1) result *= base;

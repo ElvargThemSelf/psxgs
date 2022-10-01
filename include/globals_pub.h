@@ -1,5 +1,5 @@
-#ifndef PSXGS_GLOBALS_PUB_H
-#define PSXGS_GLOBALS_PUB_H
+#pragma once
+
 #include <psxgpu.h>
 #include <psxgte.h>
 
@@ -33,5 +33,3 @@ extern PACKET* GsOUT_PACKET_CURSOR;
 extern GsCOORDINATE2 WORLD;
 // World-to-screen matrix used by default
 extern MATRIX GsWSMATRIX;
-
-#endif

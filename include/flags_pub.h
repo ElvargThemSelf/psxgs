@@ -1,5 +1,4 @@
-#ifndef PSXGS_FLAGS_PUB_H
-#define PSXGS_FLAGS_PUB_H
+#pragma once 
 
 /* GsInitGraph() flags (Sony) */
 
@@ -26,5 +25,3 @@
 #define GsVRAM16BIT 0
 // Use 24-bit VRAM color depth
 #define GsVRAM24BIT 1
-
-#endif

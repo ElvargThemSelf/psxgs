@@ -20,8 +20,5 @@ MATRIX GsIDMATRIX = {{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, {1, 1, 1}};
 MATRIX GsWSMATRIX = {{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}}, {1, 1, 1}};
 
 // TODO: Should the matrix be ID matrix instead?
-#define WORLD_INITIAL_MATRIX                           \
-    {                                                  \
-        {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}, { 1, 1, 1 } \
-    }
+#define WORLD_INITIAL_MATRIX { { {0, 0, 0}, {0, 0, 0}, {0, 0, 0}}, { 1, 1, 1 } }
 GsCOORDINATE2 WORLD = {0, WORLD_INITIAL_MATRIX, WORLD_INITIAL_MATRIX, NULL, NULL, NULL};

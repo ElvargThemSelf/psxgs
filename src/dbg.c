@@ -84,75 +84,75 @@ typedef enum {
 static void GsGetOTPrimName(char *name, GsOTPrimCode prim_code) {
     switch (prim_code) {
         case PRIM_POLY_F3:
-            strcpy(name, "PRIM_POLY_F3\0");
+            strncpy(name, "PRIM_POLY_F3\0", sizeof(name));
             break;
         case PRIM_POLY_FT3:
-            strcpy(name, "PRIM_POLY_FT3\0");
+            strncpy(name, "PRIM_POLY_FT3\0", sizeof(name));
             break;
         case PRIM_POLY_G3:
-            strcpy(name, "PRIM_POLY_G3\0");
+            strncpy(name, "PRIM_POLY_G3\0", sizeof(name));
             break;
         case PRIM_POLY_GT3:
-            strcpy(name, "PRIM_POLY_GT3\0");
+            strncpy(name, "PRIM_POLY_GT3\0", sizeof(name));
             break;
 
         case PRIM_POLY_F4:
-            strcpy(name, "PRIM_POLY_F4\0");
+            strncpy(name, "PRIM_POLY_F4\0", sizeof(name));
             break;
         case PRIM_POLY_FT4:
-            strcpy(name, "PRIM_POLY_FT4\0");
+            strncpy(name, "PRIM_POLY_FT4\0", sizeof(name));
             break;
         case PRIM_POLY_G4:
-            strcpy(name, "PRIM_POLY_G4\0");
+            strncpy(name, "PRIM_POLY_G4\0", sizeof(name));
             break;
         case PRIM_POLY_GT4:
-            strcpy(name, "PRIM_POLY_GT4\0");
+            strncpy(name, "PRIM_POLY_GT4\0", sizeof(name));
             break;
 
         case PRIM_PRIM_SPRT_8:
-            strcpy(name, "PRIM_PRIM_SPRT_8\0");
+            strncpy(name, "PRIM_PRIM_SPRT_8\0", sizeof(name));
             break;
         case PRIM_PRIM_SPRT_16:
-            strcpy(name, "PRIM_PRIM_SPRT_16\0");
+            strncpy(name, "PRIM_PRIM_SPRT_16\0", sizeof(name));
             break;
         case PRIM_SPRT:
-            strcpy(name, "PRIM_SPRT\0");
+            strncpy(name, "PRIM_SPRT\0", sizeof(name));
             break;
 
         case PRIM_TILE_1:
-            strcpy(name, "PRIM_TILE_1\0");
+            strncpy(name, "PRIM_TILE_1\0", sizeof(name));
             break;
         case PRIM_TILE_8:
-            strcpy(name, "PRIM_TILE_8\0");
+            strncpy(name, "PRIM_TILE_8\0", sizeof(name));
             break;
         case PRIM_TILE_16:
-            strcpy(name, "PRIM_TILE_16\0");
+            strncpy(name, "PRIM_TILE_16\0", sizeof(name));
             break;
         case PRIM_TILE:
-            strcpy(name, "PRIM_TILE\0");
+            strncpy(name, "PRIM_TILE\0", sizeof(name));
             break;
 
         case PRIM_LINE_F2:
-            strcpy(name, "PRIM_LINE_F2\0");
+            strncpy(name, "PRIM_LINE_F2\0", sizeof(name));
             break;
         case PRIM_LINE_G2:
-            strcpy(name, "PRIM_LINE_G2\0");
+            strncpy(name, "PRIM_LINE_G2\0", sizeof(name));
             break;
         case PRIM_LINE_F3:
-            strcpy(name, "PRIM_LINE_F3\0");
+            strncpy(name, "PRIM_LINE_F3\0", sizeof(name));
             break;
         case PRIM_LINE_G3:
-            strcpy(name, "PRIM_LINE_G3\0");
+            strncpy(name, "PRIM_LINE_G3\0", sizeof(name));
             break;
         case PRIM_LINE_F4:
-            strcpy(name, "PRIM_LINE_F4\0");
+            strncpy(name, "PRIM_LINE_F4\0", sizeof(name));
             break;
         case PRIM_LINE_G4:
-            strcpy(name, "PRIM_LINE_G4\0");
+            strncpy(name, "PRIM_LINE_G4\0", sizeof(name));
             break;
 
         case PRIM_FILL:
-            strcpy(name, "PRIM_FILL\0");
+            strncpy(name, "PRIM_FILL\0", sizeof(name));
             break;
         default:
             sprintf(name, "UNKNOWN(0x%X)\0", (unsigned char)prim_code);
@@ -169,14 +169,14 @@ void GsDumpOT(const GsOT *ot) {
     while (!isendprim(prim)) {
         // We don't care about filler/NOP primitives.
         const bool is_filler = getcode(prim) == 0x00;
+
         if (!is_filler) {
             const size_t prim_addr = (size_t)prim;
             const GsOTPrimCode prim_code = (GsOTPrimCode)getcode(prim);
             char prim_name[32];
             GsGetOTPrimName(prim_name, prim_code);
             printf("--> <0x%lX: %s> ", prim_addr, prim_name);
-        }
-        prim = nextPrim(prim);
+        } prim = nextPrim(prim);
     }
     printf("--> <End>}\n");
 }
